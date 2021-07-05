@@ -1,0 +1,68 @@
+import IPython.display
+game_list = ['   ']*9
+playre1_mark = 'X'
+player2_mark = 'O'
+
+def board_display():
+    print(game_list[6] + "|" + game_list[7] + "|" + game_list[8] + "|\n")
+    print(game_list[3] + "|" + game_list[4] + "|" + game_list[5] + "|\n")
+    print(game_list[0] + "|" + game_list[1] + "|" + game_list[2] + "|\n")
+	
+#check the board space and return False if board is FULL
+def board_full_chcek():
+    #for i in range(9):
+    if '   '  in game_list:
+        return True
+    else:
+        return False
+		
+def board_position():
+    while board_check:
+        position = int(input('PLAYER, choose your position: '))
+        if game_list[position].isspace():
+            game_list[position] = mark #use both  x o here usinf some parameter
+            break
+        else:
+            #player1 = int(input('PLAYER-1, position not free, Please choose another: '))
+            continue
+			
+def game_winner():
+    return ((game_list[0] == game_list[1] == game_list[2] == mark) or 
+       (game_list[3] == game_list[4] == game_list[5] == mark) or
+       (game_list[6] == game_list[7] == game_list[8] == mark) or    
+       (game_list[2] == game_list[5] == game_list[8] == mark) or
+       (game_list[1] == game_list[4] == game_list[7] == mark) or
+       (game_list[0] == game_list[3] == game_list[6] == mark) or
+       (game_list[0] == game_list[4] == game_list[8] == mark) or
+       (game_list[2] == game_list[4] == game_list[6] == mark))
+	   
+#Game Logic
+while True:
+    IPython.display.clear_output()
+    board_display()
+    board_check = board_full_chcek()
+    
+    print('Player-1 turn')
+    mark = 'X'
+    board_position()
+    winner = game_winner()
+    if winner:
+        print(f'Player-1 won and the symbol is {mark}')
+        break
+        
+    
+    board_check = board_full_chcek()
+    
+    IPython.display.clear_output()
+    board_display()
+    print('Player-2 turn')
+    mark = 'O'
+    board_position()
+    winner = game_winner()
+    if winner:
+        print(f'Player-1 won and the symbol is {mark}')
+        break
+    
+    if '   '  not in game_list:
+	print('board is full')
+        break
